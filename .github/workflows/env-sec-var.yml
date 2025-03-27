@@ -15,10 +15,10 @@ jobs:
     - name: Use Environment Secrets and Variables
       run: |
         echo "Using Environment Secrets and Variables"
-        echo "APP_INSIGHTS_INSTRUMENTATIONKEY is: $APP_INSIGHTS_INSTRUMENTATIONKEY"
-        echo "DB_CONNECTION_STRING is: $DB_CONNECTION_STRING"
+        echo "APP_INSIGHTS_INSTRUMENTATIONKEY is: $TF_VAR_APP_INSIGHTS_INSTRUMENTATIONKEY"
+        echo "DB_CONNECTION_STRING is: $TF_VAR_DB_CONNECTION_STRING"
       env:
         # Secrets
-        DB_CONNECTION_STRING: ${{ secrets.DB_CONNECTION_STRING }}
+        TF_VAR_DB_CONNECTION_STRING: ${{ secrets.DB_CONNECTION_STRING }}
         # Variables
-        APP_INSIGHTS_INSTRUMENTATIONKEY: ${{ vars.APP_INSIGHTS_INSTRUMENTATIONKEY }}
+        TF_VAR_APP_INSIGHTS_INSTRUMENTATIONKEY: ${{ vars.APP_INSIGHTS_INSTRUMENTATIONKEY }}

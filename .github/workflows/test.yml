@@ -1,4 +1,4 @@
-name: test Workflow
+name: env sec Workflow
 
 on:
   workflow_dispatch:

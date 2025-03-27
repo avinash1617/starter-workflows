@@ -1,4 +1,4 @@
-name: final-env-sec-vars
+name: env-sec-vars Workflow
 
 on:
   workflow_dispatch:
@@ -27,7 +27,5 @@ jobs:
         echo "APP_INSIGHTS_INSTRUMENTATIONKEY is: $TF_VAR_APP_INSIGHTS_INSTRUMENTATIONKEY"
         echo "DB_CONNECTION_STRING is: $TF_VAR_DB_CONNECTION_STRING"
       env:
-        # Secrets (dynamically based on environment)
-        TF_VAR_DB_CONNECTION_STRING: ${{ secrets['DB_CONNECTION_STRING_' + inputs.environment] }}
-        # Variables (dynamically based on environment)
-        TF_VAR_APP_INSIGHTS_INSTRUMENTATIONKEY: ${{ vars['APP_INSIGHTS_INSTRUMENTATIONKEY_' + inputs.environment] }}
+        TF_VAR_APP_INSIGHTS_INSTRUMENTATIONKEY: ${{ secrets.APP_INSIGHTS_INSTRUMENTATIONKEY_${{ inputs.environment }} }}
+        TF_VAR_DB_CONNECTION_STRING: ${{ secrets.DB_CONNECTION_STRING_${{ inputs.environment }} }}

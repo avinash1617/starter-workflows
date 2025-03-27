@@ -1,0 +1,20 @@
+name: Example Workflow
+
+on:
+  workflow_dispatch:
+
+jobs:
+  use-environment-variables:
+    runs-on: ubuntu-latest
+    environment: production
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    - name: Use Environment Variables
+      run: |
+        echo "Using Environment Variables"
+        echo "APP_INSIGHTS_INSTRUMENTATIONKEY is: $APP_INSIGHTS_INSTRUMENTATIONKEY"
+        echo "DB_CONNECTION_STRING is: $DB_CONNECTION_STRING"
+      

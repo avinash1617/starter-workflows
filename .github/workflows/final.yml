@@ -1,0 +1,33 @@
+name: final-env-sec-vars
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        type: choice
+        description: 'Select the environment to deploy'
+        required: true
+        options:
+          - dev
+          - test
+          - staging
+          - production
+
+jobs:
+  use-secrets-and-variables:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    - name: Use Environment Secrets and Variables
+      run: |
+        echo "Using Environment Secrets and Variables"
+        echo "APP_INSIGHTS_INSTRUMENTATIONKEY is: $TF_VAR_APP_INSIGHTS_INSTRUMENTATIONKEY"
+        echo "DB_CONNECTION_STRING is: $TF_VAR_DB_CONNECTION_STRING"
+      env:
+        # Secrets (dynamically based on environment)
+        TF_VAR_DB_CONNECTION_STRING: ${{ secrets['DB_CONNECTION_STRING_' + inputs.environment] }}
+        # Variables (dynamically based on environment)
+        TF_VAR_APP_INSIGHTS_INSTRUMENTATIONKEY: ${{ vars['APP_INSIGHTS_INSTRUMENTATIONKEY_' + inputs.environment] }}

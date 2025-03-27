@@ -1,3 +1,5 @@
+name: final-vars-sec
+
 on:
   workflow_dispatch:
     inputs:

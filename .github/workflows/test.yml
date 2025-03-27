@@ -1,0 +1,23 @@
+name: Example Workflow
+
+on:
+  workflow_dispatch:
+
+jobs:
+  use-environment-secrets:
+    runs-on: ubuntu-latest
+    # Specify the environment to use
+    environment: dev
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    - name: Use Environment Secrets
+      run: |
+        echo "Using Environment Secrets"
+        echo "APP_INSIGHTS_INSTRUMENTATIONKEY is: $APP_INSIGHTS_INSTRUMENTATIONKEY"
+        echo "DB_CONNECTION_STRING is: $DB_CONNECTION_STRING"
+      env:
+        APP_INSIGHTS_INSTRUMENTATIONKEY: ${{ secrets.APP_INSIGHTS_INSTRUMENTATIONKEY }}
+        DB_CONNECTION_STRING: ${{ secrets.DB_CONNECTION_STRING }}

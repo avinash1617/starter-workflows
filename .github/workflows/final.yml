@@ -21,11 +21,42 @@ jobs:
     - name: Checkout Code
       uses: actions/checkout@v4
 
-    - name: Use Environment Secrets and Variables
+    - name: Use Environment Secrets and Variables (dev)
+      if: ${{ inputs.environment == 'dev' }}
       run: |
-        echo "Using Environment Secrets and Variables"
+        echo "Using Environment: dev"
         echo "APP_INSIGHTS_INSTRUMENTATIONKEY is: $TF_VAR_APP_INSIGHTS_INSTRUMENTATIONKEY"
         echo "DB_CONNECTION_STRING is: $TF_VAR_DB_CONNECTION_STRING"
       env:
-        TF_VAR_APP_INSIGHTS_INSTRUMENTATIONKEY: ${{ secrets.APP_INSIGHTS_INSTRUMENTATIONKEY_${{ inputs.environment }} }}
-        TF_VAR_DB_CONNECTION_STRING: ${{ secrets.DB_CONNECTION_STRING_${{ inputs.environment }} }}
+        TF_VAR_APP_INSIGHTS_INSTRUMENTATIONKEY: ${{ secrets.APP_INSIGHTS_INSTRUMENTATIONKEY_DEV }}
+        TF_VAR_DB_CONNECTION_STRING: ${{ secrets.DB_CONNECTION_STRING_DEV }}
+
+    - name: Use Environment Secrets and Variables (test)
+      if: ${{ inputs.environment == 'test' }}
+      run: |
+        echo "Using Environment: test"
+        echo "APP_INSIGHTS_INSTRUMENTATIONKEY is: $TF_VAR_APP_INSIGHTS_INSTRUMENTATIONKEY"
+        echo "DB_CONNECTION_STRING is: $TF_VAR_DB_CONNECTION_STRING"
+      env:
+        TF_VAR_APP_INSIGHTS_INSTRUMENTATIONKEY: ${{ secrets.APP_INSIGHTS_INSTRUMENTATIONKEY_TEST }}
+        TF_VAR_DB_CONNECTION_STRING: ${{ secrets.DB_CONNECTION_STRING_TEST }}
+
+    - name: Use Environment Secrets and Variables (staging)
+      if: ${{ inputs.environment == 'staging' }}
+      run: |
+        echo "Using Environment: staging"
+        echo "APP_INSIGHTS_INSTRUMENTATIONKEY is: $TF_VAR_APP_INSIGHTS_INSTRUMENTATIONKEY"
+        echo "DB_CONNECTION_STRING is: $TF_VAR_DB_CONNECTION_STRING"
+      env:
+        TF_VAR_APP_INSIGHTS_INSTRUMENTATIONKEY: ${{ secrets.APP_INSIGHTS_INSTRUMENTATIONKEY_STAGING }}
+        TF_VAR_DB_CONNECTION_STRING: ${{ secrets.DB_CONNECTION_STRING_STAGING }}
+
+    - name: Use Environment Secrets and Variables (production)
+      if: ${{ inputs.environment == 'production' }}
+      run: |
+        echo "Using Environment: production"
+        echo "APP_INSIGHTS_INSTRUMENTATIONKEY is: $TF_VAR_APP_INSIGHTS_INSTRUMENTATIONKEY"
+        echo "DB_CONNECTION_STRING is: $TF_VAR_DB_CONNECTION_STRING"
+      env:
+        TF_VAR_APP_INSIGHTS_INSTRUMENTATIONKEY: ${{ secrets.APP_INSIGHTS_INSTRUMENTATIONKEY_PRODUCTION }}
+        TF_VAR_DB_CONNECTION_STRING: ${{ secrets.DB_CONNECTION_STRING_PRODUCTION }}

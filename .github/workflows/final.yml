@@ -1,4 +1,4 @@
-name: env-sec-vars Workflow
+name: final-env-sec-vars
 
 on:
   workflow_dispatch:

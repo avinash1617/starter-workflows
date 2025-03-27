@@ -16,6 +16,7 @@ on:
 jobs:
   use-secrets-and-variables:
     runs-on: ubuntu-latest
+    environment: ${{ inputs.environment }}
 
     steps:
     - name: Checkout Code
